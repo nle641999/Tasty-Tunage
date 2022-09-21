@@ -23,3 +23,4 @@ This application allows the user to search up a song, the application then prese
 - BootstrapAPI
 
 ## MockUp
+<img src = "assets/images/Screenshot[3]-01.png">
