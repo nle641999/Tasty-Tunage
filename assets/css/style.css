@@ -1,0 +1,24 @@
+#root {
+    --primary: var(#1db954);
+    --secondary: var(gray);
+}
+
+body {
+    background-color: var(--secondary);
+}
+
+.jumbotron {
+    background-color: transparent;
+}
+
+h1 {
+    
+  }
+
+/*Autocomplete styling*/
+.ui-autocomplete-category {
+    font-weight: bold;
+    padding: .2em .4em;
+    margin: .8em 0 .2em;
+    line-height: 1.5;
+  }

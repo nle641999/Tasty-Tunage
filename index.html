@@ -1,35 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="./assets/css/style.css"
+    />
+
     <title>Tasty Tunage</title>
-</head>
+  </head>
 
-<body>
-    <header class="container-fluid text-center text-white bg-dark p-2">
-        <h1>Tasty Tunage</h1>
-        <style> h1 {background-color: rgb(72, 163, 72);} </style>
-    </header>
+  <body>
+    <header class="jumbotron jumbotron-fluid jumbotron bg-success text-white text-center">
+      <h1>Tasty Tunage</h1>
+          </header>
 
-    <div class="text-light bg-dark jumbotron jumbotron-fluid">
-        <div class="container">
-            <h2>Search for a Song!</h2>
-            <form class="">
-                <div class="form-row">
-                    <div class="col-md-8 col-12">
-                        <input name="searchInput" placeholder="Enter a Song" type="text" class="form-control form-control-lg" value=""></div>
-                        <div class="col-md-4 col-12"><button type="submit" class="btn btn-success btn-lg">Submit Search</button>
-                        </div>
-                    </div>
-                </form>
+    <div class="container-fluid text-center text-white p-2">
+      <div class="container">
+        <h2>Search for a Song!</h2>
+        <form class="">
+          <div class="form-row">
+            <div class="col-md-8 col-12">
+              <input
+                name="searchInput"
+                placeholder="Enter a Song"
+                type="text"
+                class="form-control form-control-lg"
+                value=""
+                id="search"
+              />
             </div>
-        </div>
+            <div class="col-md-4 col-12">
+              <button type="submit" class="btn btn-success btn-lg">
+                Submit Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--Autocomplete Script-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!--Project Custom Script-->
     <script src="./assets/js/script.js"></script>
-</body>
-
+  </body>
 </html>
