@@ -41,3 +41,68 @@ $( function() {
 } );
 
 // Autocomplete Ends
+
+var button = $(".btn");
+
+function songSearch(song) {
+
+  var url = "https://spotify81.p.rapidapi.com/search?q="
+
+  for (var i = 0; i < song.length; i++) {
+    if (song[i] === ' ') {
+      song = song.replace(' ', "%20");
+    }
+  }
+
+  var searchUrl = url + song + "&type=tracks";
+
+  const settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": searchUrl,
+    "method": "GET",
+    "headers": {
+    "X-RapidAPI-Key": "6ba9b5ad58mshd483b168ebe03d8p197d0fjsncb9c30ca309d",
+    "X-RapidAPI-Host": "spotify81.p.rapidapi.com"
+    }
+  };
+
+  console.log(searchUrl);
+
+  $.ajax(settings).done(function (response) {
+    
+    console.log(response);
+
+  }).then(function(response) {
+      
+      for (var i = 0; i < response.tracks.length; i++) {
+        var songInfo = {
+        name: response.tracks[i].data.name,
+        artist: response.tracks[i].data.artists.items[0].profile.name,
+        album: response.tracks[i].data.albumOfTrack.name,
+        duration: response.tracks[i].data.duration.totalMilliseconds,
+        }
+        //console.log(trackName);
+        var songName = songInfo.name;
+        var songArtist = songInfo.artist;
+        var songAlbum = songInfo.album;
+        var songDuration = songInfo.duration;
+  
+        var tempDuration = moment.duration(songDuration);
+        songDuration = tempDuration.minutes() + ':' + tempDuration.seconds();
+
+        console.log(songName);
+        console.log(songArtist);
+        console.log(songAlbum);
+        console.log(songDuration);
+      }
+    })
+}
+
+button.on('click', function(event) {
+  event.preventDefault();
+
+  var song = $("#search").val();
+  songSearch(song);
+})
+
