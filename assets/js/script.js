@@ -69,18 +69,18 @@ function songSearch(song) {
 
   console.log(searchUrl);
 
-  $.ajax(settings).done(function (response) {
+  $.ajax(settings).done(function (spotify) {
     
-    console.log(response);
+    console.log(spotify);
 
-  }).then(function(response) {
+  }).then(function(spotify) {
       
-      for (var i = 0; i < response.tracks.length; i++) {
+      for (var i = 0; i < spotify.tracks.length; i++) {
         var songInfo = {
-        name: response.tracks[i].data.name,
-        artist: response.tracks[i].data.artists.items[0].profile.name,
-        album: response.tracks[i].data.albumOfTrack.name,
-        duration: response.tracks[i].data.duration.totalMilliseconds,
+        name: spotify.tracks[i].data.name,
+        artist: spotify.tracks[i].data.artists.items[0].profile.name,
+        album: spotify.tracks[i].data.albumOfTrack.name,
+        duration: spotify.tracks[i].data.duration.totalMilliseconds,
         }
         //console.log(trackName);
         var songName = songInfo.name;
@@ -91,10 +91,11 @@ function songSearch(song) {
         var tempDuration = moment.duration(songDuration);
         songDuration = tempDuration.minutes() + ':' + tempDuration.seconds();
 
-        console.log(songName);
-        console.log(songArtist);
+        console.log('Song name: ' + songName + ' , Artist: ' + songArtist 
+                    + ' , Album: ' + songAlbum + ', Duration: ', songDuration);
+        /* console.log(songArtist);
         console.log(songAlbum);
-        console.log(songDuration);
+        console.log(songDuration); */
       }
     })
 }
