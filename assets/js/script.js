@@ -89,7 +89,13 @@ function songSearch(song) {
         var songDuration = songInfo.duration;
   
         var tempDuration = moment.duration(songDuration);
-        songDuration = tempDuration.minutes() + ':' + tempDuration.seconds();
+        var inSeconds = tempDuration.seconds();
+        if (inSeconds < 10) {
+          songDuration = tempDuration.minutes() + ':0' + tempDuration.seconds();
+        } else {
+          songDuration = tempDuration.minutes() + ':' + tempDuration.seconds();
+        }
+        
 
         console.log('Song name: ' + songName + ' , Artist: ' + songArtist 
                     + ' , Album: ' + songAlbum + ', Duration: ', songDuration);
