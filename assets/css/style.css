@@ -1,14 +1,16 @@
 #root {
     --primary: var(#1db954);
     --secondary: var(gray);
+    margin: 0;
+    padding: 0;
 }
+
 
 body {
     background-color: var(--secondary);
 }
 
+
 .jumbotron {
     background-color: transparent;
 }
-
-  
