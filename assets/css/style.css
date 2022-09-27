@@ -1,20 +1,44 @@
 #root {
     --primary: var(#1db954);
-    --secondary: var(gray);
+    --secondary: var(#157e33);
+    --teriary: var(#13141b);
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+
+h1 {
+  font-size: 3.6vw;
+}
+
+h2 { 
+  font-size: 2.4vw;
+}
+
+h3 {
+  font-size: 2.1vw;
+}
+
+p { 
+  font-size: 1.6vw;
+}
+
 .jumbotron {
     background-color: transparent;
+    height: 72px;
+    padding: 10px;
+    width: 100%;
 }
 
 body {
-    background-color: #13141b;
+    background-color: black;
     color: #ffffff;
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: top;
+    font-family: 'Raleway', sans-serif;
+    max-width: 100%;
   }
   
   .form-control {
@@ -29,4 +53,56 @@ body {
     padding: 8px 35px;
   }
   
-  
+ /*Results Container */
+#results {
+ justify-content: center;
+ padding: 10px;
+ margin: 10px;
+}
+
+/*Responsive colunms*/
+ .column {
+  float: left;
+  width: 29%;
+  padding: 20px;
+  background-color: #13141b;
+  border-radius: 10px;
+}
+
+/* Border line */
+#left, #middle, #right {
+  border-right: 2px solid #1db954;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#middle, .sample {
+  text-align: left;
+}
+
+.sample img {
+  width: 3.2vw;
+  height: auto;
+}
+
+
+/*Media screen for columns*/
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    
+  }
+
+  #middle, #left, #right {
+    border-right: 0px;
+    border-bottom: 2px solid #1db954;
+  }
+
+}
+
+
+
