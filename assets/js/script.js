@@ -52,13 +52,14 @@ function songSearch(song) {
         songDuration = tempDuration.minutes() + ':' + tempDuration.seconds();
       }
 
-
       console.log('Song name: ' + songName + ' , Artist: ' + songArtist
         + ' , Album: ' + songAlbum + ', Duration: ', songDuration);
       /* console.log(songArtist);
       console.log(songAlbum);
       console.log(songDuration); */
+
     }
+    getSongId(spotify.tracks[0].data.name)
   })
 }
 
@@ -67,4 +68,49 @@ button.on('click', function (event) {
 
   var song = $("#search").val();
   songSearch(song);
+
 })
+
+function getSongId(song, artist) {
+  song = song.trim()
+  console.log(song)
+
+  const settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": `https://genius-song-lyrics1.p.rapidapi.com/search?q=${song}&per_page=10&page=1`,
+    "method": "GET",
+    "headers": {
+      "X-RapidAPI-Key": "771d35b36bmsh62f70d22890e5d0p16709bjsn749829a1231f",
+      "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com"
+    }
+  };
+
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+    var songId = response.response.hits[0].result.id
+    console.log(songId)
+    getSongLyrics(songId)
+  });
+}
+
+function getSongLyrics(songId) {
+  const settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": `https://genius-song-lyrics1.p.rapidapi.com/songs/${songId}/lyrics`,
+    "method": "GET",
+    "headers": {
+      "X-RapidAPI-Key": "771d35b36bmsh62f70d22890e5d0p16709bjsn749829a1231f",
+      "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com"
+    }
+  };
+
+  $.ajax(settings).done(function (response) {
+    console.log('inside getSongLyrics')
+    console.log(response);
+  });
+}
+
+
+
