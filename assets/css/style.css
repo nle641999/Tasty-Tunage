@@ -7,7 +7,6 @@
     padding: 0;
 }
 
-
 h1 {
   font-size: 3.6vw;
 }
@@ -21,7 +20,7 @@ h3 {
 }
 
 p { 
-  font-size: 1.6vw;
+  font-size: 1.5vw;
 }
 
 .jumbotron {
@@ -80,7 +79,7 @@ img {
   height: auto;
 }
 
-#middle, .sample {
+#middle, .sample, #right  {
   text-align: left;
 }
 
