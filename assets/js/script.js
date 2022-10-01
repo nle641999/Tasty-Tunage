@@ -10,16 +10,16 @@ function songSearch(song) {
     }
   }
 
-  var searchUrl = url + song + "&type=tracks";
+  var searchUrl = song + "&type=tracks";
 
   const settings = {
     "async": true,
     "crossDomain": true,
-    "url": searchUrl,
+    "url": `https://spotify23.p.rapidapi.com/search/?q=${searchUrl}`,
     "method": "GET",
     "headers": {
       "X-RapidAPI-Key": "6ba9b5ad58mshd483b168ebe03d8p197d0fjsncb9c30ca309d",
-      "X-RapidAPI-Host": "spotify81.p.rapidapi.com"
+      "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
     }
   };
 
@@ -33,11 +33,14 @@ function songSearch(song) {
 
     $("#results").empty();
 
-        var songName = spotify.tracks[0].data.name
-        var artist = spotify.tracks[0].data.artists.items[0].profile.name
-        var album = spotify.tracks[0].data.albumOfTrack.name
-        var songDuration = spotify.tracks[0].data.duration.totalMilliseconds
-        var icon = spotify.tracks[0].data.albumOfTrack.coverArt.sources[2].url
+        var songName = spotify.tracks.items[0].data.name;
+        var artist = spotify.tracks.items[0].data.artists.items[0].profile.name;
+        var album = spotify.tracks.items[0].data.albumOfTrack.name;
+        var songDuration = spotify.tracks.items[0].data.duration.totalMilliseconds;
+        var icon = spotify.tracks.items[0].data.albumOfTrack.coverArt.sources[2].url;
+        var songID = spotify.tracks.items[0].data.id;
+        var shareURL = spotify.tracks.items[0].data.albumOfTrack.sharingInfo.shareUrl;
+        console.log(shareURL);
 
         var tempDuration = moment.duration(songDuration);
         var inSeconds = tempDuration.seconds();
@@ -48,9 +51,11 @@ function songSearch(song) {
           }
 
         var coverArt = $(`
+        <a href=${shareURL} target="_blank"
           <div class="column" id="left">
             <img src=${icon}>
-          </div>`)
+          </div>
+        </a>`)
 
         $("#results").append(coverArt);
 
@@ -65,36 +70,8 @@ function songSearch(song) {
         
           $("#results").append(content);
 
-    /* for (var i = 0; i < spotify.tracks.length; i++) {
-      var songInfo = {
-        name: spotify.tracks[i].data.name,
-        artist: spotify.tracks[i].data.artists.items[0].profile.name,
-        album: spotify.tracks[i].data.albumOfTrack.name,
-        duration: spotify.tracks[i].data.duration.totalMilliseconds,
-      }
-      //console.log(trackName);
-      var songName = songInfo.name;
-      var songArtist = songInfo.artist;
-      var songAlbum = songInfo.album;
-      var songDuration = songInfo.duration;
-
-      var tempDuration = moment.duration(songDuration);
-      var inSeconds = tempDuration.seconds();
-      if (inSeconds < 10) {
-        songDuration = tempDuration.minutes() + ':0' + tempDuration.seconds();
-      } else {
-        songDuration = tempDuration.minutes() + ':' + tempDuration.seconds();
-      }
-
-      console.log('Song name: ' + songName + ' , Artist: ' + songArtist
-        + ' , Album: ' + songAlbum + ', Duration: ', songDuration);
-      /* console.log(songArtist);
-      console.log(songAlbum);
-      console.log(songDuration); */
-
-  //}
     genius(song);
-    getSongId(spotify.tracks[0].data.name)
+    getSongLyrics(songID);
   })
 }
 
@@ -105,29 +82,6 @@ button.on('click', function (event) {
   songSearch(song);
 
 })
-
-function getSongId(song, artist) {
-  song = song.trim()
-  console.log(song)
-
-  const settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": `https://spotify23.p.rapidapi.com/search/?q=${song}&type=tracks`,
-    "method": "GET",
-    "headers": {
-      "X-RapidAPI-Key": "6ba9b5ad58mshd483b168ebe03d8p197d0fjsncb9c30ca309d",
-      "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
-    }
-  };
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-    var songId = response.tracks.items[0].data.id
-    console.log(songId)
-    getSongLyrics(songId)
-  });
-}
 
 function getSongLyrics(songId) {
   const settings = {
@@ -148,7 +102,7 @@ function getSongLyrics(songId) {
     var lyrics = response.lyrics.lines;
     console.log(lyrics)
 
-    var lyricsHeader = $('<div class="column" id="right"></div>');
+    var lyricsHeader = $('<div class="column" id="right"><h3>Lyrics</h3></div>');
 
     for (var i = 0; i < lyrics.length; i++) {
       var currentLine = $('<p>' + lyrics[i].words + '</p>');
@@ -204,4 +158,3 @@ function getSamples(id) {
     console.log(sampledIn);
   });
 }
-
