@@ -65,9 +65,13 @@ body {
   border-radius: 1.5rem;
   padding: 8px 35px;
   margin: 5px;
-  background-color: #1db954;
+  background-color: #157e33;
   color: #ffffff;
 }
+
+.historyBtn button:hover {
+  background-color: #1db954;
+}  
 
 /*Results Container */
 #results {
