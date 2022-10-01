@@ -1,17 +1,17 @@
 #root {
-    --primary: var(#1db954);
-    --secondary: var(#157e33);
-    --teriary: var(#13141b);
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  --primary: var(#1db954);
+  --secondary: var(#157e33);
+  --teriary: var(#13141b);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
   font-size: 3.6vw;
 }
 
-h2 { 
+h2 {
   font-size: 2.4vw;
 }
 
@@ -19,48 +19,68 @@ h3 {
   font-size: 2.1vw;
 }
 
-p { 
+p {
   font-size: 1.5vw;
 }
 
 .jumbotron {
-    background-color: transparent;
-    width: 100%;
-    margin: 0%;
-  }
-
+  background-color: transparent;
+  width: 100%;
+  margin: 0%;
+}
 
 body {
-    background-color: black;
-    color: #ffffff;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: top;
-    font-family: 'Raleway', sans-serif;
-    max-width: 100%;
-  }
-  
-  .form-control {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 22px;
-    border: none;
-    border-radius: 25px;
-  }
+  background-color: black;
+  color: #ffffff;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: top;
+  font-family: "Raleway", sans-serif;
+  max-width: 100%;
+}
 
-  .btn {
-    border-radius: 1.5rem;
-    padding: 8px 35px;
-  }
-  
- /*Results Container */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 22px;
+  border: none;
+  border-radius: 25px;
+}
+
+.btn {
+  border-radius: 1.5rem;
+  padding: 8px 35px;
+}
+
+/*Section for History of searches */
+.historyBtn {
+  background-color: var(--teriary);
+  border: 1px solid #1db954;
+  border-radius: 25px;
+  height: auto;
+  margin: 25px 50px 25px 50px;
+  padding: 15px;
+}
+
+.historyBtn button {
+  border-radius: 1.5rem;
+  padding: 8px 35px;
+  margin: 5px;
+  background-color: #157e33;
+  color: #ffffff;
+}
+
+.historyBtn button:hover {
+  background-color: #1db954;
+}  
+
+/*Results Container */
 #results {
- justify-content: center;
- padding: 10px;
- margin: 10px;
+  justify-content: center;
+  padding-top: 25px;
 }
 
 /*Responsive colunms*/
- .column {
+.column {
   float: left;
   width: 29%;
   padding: 20px;
@@ -68,8 +88,10 @@ body {
   border-radius: 10px;
 }
 
-/* Column Border line */
-#left, #middle, #right {
+/* Border line */
+#left,
+#middle,
+#right {
   border-right: 2px solid #1db954;
 }
 
@@ -79,13 +101,14 @@ body {
   height: 550px;
   }
 
-
 img {
   max-width: 100%;
   height: auto;
 }
 
-#middle, .sample, #right  {
+#middle,
+.sample,
+#right {
   text-align: left;
 }
 
@@ -94,18 +117,16 @@ img {
   height: auto;
 }
 
-
 /*Media screen for columns*/
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;
-    
   }
 
-  #middle, #left, #right {
+  #middle,
+  #left,
+  #right {
     border-right: 0px;
     border-bottom: 2px solid #1db954;
   }
-
 }
-
