@@ -68,10 +68,16 @@ body {
   border-radius: 10px;
 }
 
-/* Border line */
+/* Column Border line */
 #left, #middle, #right {
   border-right: 2px solid #1db954;
 }
+
+/*scroll bar*/
+#right{
+  overflow-y: scroll;
+  height: 550px;
+  }
 
 
 img {
@@ -103,7 +109,3 @@ img {
 
 }
 
-#right{
-overflow-y: scroll;
-height: 500px;
-}
