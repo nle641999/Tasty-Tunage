@@ -1,4 +1,5 @@
 var button = $(".btn");
+var previousSearches = [];
 
 function songSearch(song) {
 
@@ -67,20 +68,49 @@ function songSearch(song) {
             <p>Album: ${album}
             <p>Duration: ${songDuration}
           </div>`);
-        
+
+          genius(song, content);
           $("#results").append(content);
 
-    genius(song);
     getSongLyrics(songID);
   })
 }
 
+//on submit, application searches and presents info based on that search
 button.on('click', function (event) {
   event.preventDefault();
 
   var song = $("#search").val();
   songSearch(song);
 
+  if(!previousSearches.includes(song)) {
+    previousSearches.push(song);
+    var search = $(`<button id="songItem">${song}</button>`);
+
+    $(".historyBtn").append(search);
+  }
+
+  localStorage.setItem("song", JSON.stringify(previousSearches));
+  //console.log(previousSearches);
+
+})
+
+//When a user clicks a previous search item, they are presented with the data
+//related to that item
+$(".historyBtn").on("click", "#songItem", function() {
+  var previousSong = $(this).text();
+  songSearch(previousSong);
+})
+
+$(document).ready(function() {
+  var storageHistory = JSON.parse(localStorage.getItem("song"));
+
+  if(storageHistory != null){
+    var lastSong = storageHistory.length-1;
+    var history = storageHistory[lastSong];
+  }
+
+  songSearch(history);
 })
 
 function getSongLyrics(songId) {
@@ -116,14 +146,14 @@ function getSongLyrics(songId) {
   );
 }
 
-function genius(song) {
+function genius(song, content) {
   const settings = {
     "async": true,
     "crossDomain": true,
     "url": `https://genius-song-lyrics1.p.rapidapi.com/search?q=${song}`,
     "method": "GET",
     "headers": {
-      "X-RapidAPI-Key": "475dce269emsh2b6f39f956bde3ep1839f9jsnc87251b50322",
+      "X-RapidAPI-Key": "6ba9b5ad58mshd483b168ebe03d8p197d0fjsncb9c30ca309d",
       "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com"
     }
   };
@@ -132,18 +162,18 @@ function genius(song) {
   }).then(function (response) {
     var geniusId = response.response.hits[0].result.id;
     console.log(geniusId);
-    getSamples(geniusId);
+    getSamples(geniusId, content);
   });
 }
 
-function getSamples(id) {
+function getSamples(id, content) {
   const settings = {
     "async": true,
     "crossDomain": true,
     "url": `https://genius-song-lyrics1.p.rapidapi.com/songs/${id}`,
     "method": "GET",
     "headers": {
-      "X-RapidAPI-Key": "475dce269emsh2b6f39f956bde3ep1839f9jsnc87251b50322",
+      "X-RapidAPI-Key": "6ba9b5ad58mshd483b168ebe03d8p197d0fjsncb9c30ca309d",
       "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com"
     }
   };
@@ -156,5 +186,42 @@ function getSamples(id) {
     console.log("Inside song_relationships")
     console.log(samples);
     console.log(sampledIn);
+
+    if (samples.songs.length != 0) {
+      var sampleHeader = $(`<h3>Samples</h3>`)
+      content.append(sampleHeader)
+      for (var i = 0; i < samples.songs.length; i++) {
+        var samplesUrl = samples.songs[i].url;
+        var sampleName = $(`
+          <a href=${samplesUrl} target="_blank"
+            <p>Title: ${samples.songs[i].full_title}</p>
+          </a>`)
+        
+        content.append(sampleName);
+
+        if(i === 2) {
+          break;
+        }
+      }
+    } 
+    
+    if (sampledIn.songs.length != 0) {
+      var sampledInHeader = $(`<h3>Sampled In</h3>`)
+      content.append(sampledInHeader);
+
+      for (var i = 0; i < sampledIn.songs.length; i++) {
+        var sampledUrl = sampledIn.songs[0].url;
+        var sampledInName = $(`
+          <a href=${sampledUrl} target="_blank"
+            <p>Title: ${sampledIn.songs[i].full_title}</p>
+          </a>`);
+
+        content.append(sampledInName);
+
+        if(i === 2) {
+          break;
+        }
+      }
+    }
   });
 }
