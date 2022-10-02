@@ -23,4 +23,4 @@ This application allows the user to search up a song, the application then prese
 <img src = "assets/images/Screenshot[3]-01.png">
 
 ## Deployed Application
-<img src = "assets/images/deployedapplication.png">
+<img src = "assets/images/image.png">
