@@ -13,9 +13,9 @@ This application allows the user to search up a song, the application then prese
 - WHEN I click on the song art
 - THEN I am redirected to the song's Spotify page
 - IF the sample has a track on Spotify
-- THEN I am redirected to the sample's Spotify page
-- IF the sample doesn't have a track on Spotify
-- THEN I am presented with an error
+- THEN I am redirected to the sample's Genius page
+- IF the sample doesn't have a track on Genius page
+- THEN I am presented with nothing
 
 ## APIs
 - GeniusAPI
