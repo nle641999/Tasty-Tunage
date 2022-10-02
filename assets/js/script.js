@@ -210,7 +210,7 @@ function getSamples(id, content) {
       content.append(sampledInHeader);
 
       for (var i = 0; i < sampledIn.songs.length; i++) {
-        var sampledUrl = sampledIn.songs[0].url;
+        var sampledUrl = sampledIn.songs[i].url;
         var sampledInName = $(`
           <a href=${sampledUrl} target="_blank"
             <p>Title: ${sampledIn.songs[i].full_title}</p>
