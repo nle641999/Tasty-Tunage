@@ -26,4 +26,4 @@ This application allows the user to search up a song, the application then prese
 <img src = "assets/images/screenshot-1.png">
 
 ## Sreenshot
-<img src = "./assets/images/livevew-1.png" alt="livevew-1.png">
+<img src = "./assets/images/livevew-1.jpeg">
