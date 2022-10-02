@@ -1,10 +1,12 @@
 var button = $(".btn");
+//Search History Array
 var previousSearches = [];
 
 function songSearch(song) {
 
-  var url = "https://spotify81.p.rapidapi.com/search?q="
+  //var url = "https://spotify81.p.rapidapi.com/search?q="
 
+  //Replaces whitespaces with %20 for the query URL
   for (var i = 0; i < song.length; i++) {
     if (song[i] === ' ') {
       song = song.replace(' ', "%20");
@@ -19,7 +21,7 @@ function songSearch(song) {
     "url": `https://spotify23.p.rapidapi.com/search/?q=${searchUrl}`,
     "method": "GET",
     "headers": {
-      "X-RapidAPI-Key": "6ba9b5ad58mshd483b168ebe03d8p197d0fjsncb9c30ca309d",
+      "X-RapidAPI-Key": "475dce269emsh2b6f39f956bde3ep1839f9jsnc87251b50322",
       "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
     }
   };
@@ -33,7 +35,7 @@ function songSearch(song) {
   }).then(function (spotify) {
 
     $("#results").empty();
-
+        //all relevant data from the spotify API
         var songName = spotify.tracks.items[0].data.name;
         var artist = spotify.tracks.items[0].data.artists.items[0].profile.name;
         var album = spotify.tracks.items[0].data.albumOfTrack.name;
@@ -42,7 +44,7 @@ function songSearch(song) {
         var songID = spotify.tracks.items[0].data.id;
         var shareURL = spotify.tracks.items[0].data.albumOfTrack.sharingInfo.shareUrl;
         console.log(shareURL);
-
+        
         var tempDuration = moment.duration(songDuration);
         var inSeconds = tempDuration.seconds();
           if (inSeconds < 10) {
@@ -83,6 +85,7 @@ button.on('click', function (event) {
   var song = $("#search").val();
   songSearch(song);
 
+  //populates the previousSearches array with user searches
   if(!previousSearches.includes(song)) {
     previousSearches.push(song);
     var search = $(`<button id="songItem">${song}</button>`);
@@ -90,6 +93,7 @@ button.on('click', function (event) {
     $(".historyBtn").append(search);
   }
 
+  //stores searches as array of strings 
   localStorage.setItem("song", JSON.stringify(previousSearches));
   //console.log(previousSearches);
 
@@ -102,6 +106,7 @@ $(".historyBtn").on("click", "#songItem", function() {
   songSearch(previousSong);
 })
 
+//retrieves the last search from the user and displays on refresh/reload
 $(document).ready(function() {
   var storageHistory = JSON.parse(localStorage.getItem("song"));
 
@@ -113,6 +118,7 @@ $(document).ready(function() {
   songSearch(history);
 })
 
+//Pulling the lyrics from the spotify data and appends them to the content variable in songSearch
 function getSongLyrics(songId) {
   const settings = {
     "async": true,
@@ -120,7 +126,7 @@ function getSongLyrics(songId) {
     "url": `https://spotify23.p.rapidapi.com/track_lyrics/?id=${songId}`,
     "method": "GET",
     "headers": {
-      "X-RapidAPI-Key": "6ba9b5ad58mshd483b168ebe03d8p197d0fjsncb9c30ca309d",
+      "X-RapidAPI-Key": "475dce269emsh2b6f39f956bde3ep1839f9jsnc87251b50322",
       "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
     }
   };
@@ -146,6 +152,7 @@ function getSongLyrics(songId) {
   );
 }
 
+//Samples functions
 function genius(song, content) {
   const settings = {
     "async": true,
@@ -198,7 +205,7 @@ function getSamples(id, content) {
           </a>`)
         
         content.append(sampleName);
-
+        //Stops the loop at 3 maximum samples
         if(i === 2) {
           break;
         }
@@ -217,7 +224,7 @@ function getSamples(id, content) {
           </a>`);
 
         content.append(sampledInName);
-
+        //Stops the loop at 3 maximum sampledIn's
         if(i === 2) {
           break;
         }
