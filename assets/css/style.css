@@ -7,6 +7,19 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover {
+  color: #1db954;
+}
+
+a:visited {
+  color: #157e33;
+}
+
 h1 {
   font-size: 3.6vw;
 }
@@ -71,7 +84,7 @@ body {
 
 .historyBtn button:hover {
   background-color: #1db954;
-}  
+}
 
 /*Results Container */
 #results {
@@ -95,11 +108,11 @@ body {
   border-right: 2px solid #1db954;
 }
 
-/*scroll bar*/
-#right{
+/*Scroll Bar*/
+#right {
   overflow-y: scroll;
-  height: 550px;
-  }
+  height: 650px;
+}
 
 img {
   max-width: 100%;
