@@ -1,3 +1,5 @@
+Deployed App: https://nle641999.github.io/Tasty-Tunage/
+
 # Tasty-Tunage
 This application allows the user to search up a song, the application then presents song title, artist name, sampled tracks (if applicable), lyrics
 ## User Story
