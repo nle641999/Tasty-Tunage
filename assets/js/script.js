@@ -1,3 +1,6 @@
+//I regret using ajax fetch method
+//Code can be cleaned up with using fetch instead
+
 var button = $(".btn");
 //Search History Array
 var previousSearches = [];
