@@ -197,7 +197,7 @@ function getSamples(id, content) {
 button.on('click', function (event) {
   event.preventDefault();
 
-  var song = $("#search").val();
+  var song = $("#search").val().trim();
   songSearch(song);
 
   //populates the previousSearches array with user searches
@@ -218,6 +218,9 @@ button.on('click', function (event) {
 //related to that item
 $(".historyBtn").on("click", "#songItem", function() {
   var previousSong = $(this).text();
+  //localStorage.clear();
+  /* previousSearches.push(previousSong)
+  localStorage.setItem("song", JSON.stringify(previousSearches)); */
   songSearch(previousSong);
 })
 
