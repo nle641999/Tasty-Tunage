@@ -78,46 +78,6 @@ function songSearch(song) {
   })
 }
 
-//on submit, application searches and presents info based on that search
-button.on('click', function (event) {
-  event.preventDefault();
-
-  var song = $("#search").val();
-  songSearch(song);
-
-  //populates the previousSearches array with user searches
-  if(!previousSearches.includes(song)) {
-    previousSearches.push(song);
-    var search = $(`<button id="songItem">${song}</button>`);
-
-    $(".historyBtn").append(search);
-  }
-
-  //stores searches as array of strings 
-  localStorage.setItem("song", JSON.stringify(previousSearches));
-  //console.log(previousSearches);
-
-})
-
-//When a user clicks a previous search item, they are presented with the data
-//related to that item
-$(".historyBtn").on("click", "#songItem", function() {
-  var previousSong = $(this).text();
-  songSearch(previousSong);
-})
-
-//retrieves the last search from the user and displays on refresh/reload
-$(document).ready(function() {
-  var storageHistory = JSON.parse(localStorage.getItem("song"));
-
-  if(storageHistory != null){
-    var lastSong = storageHistory.length-1;
-    var history = storageHistory[lastSong];
-  }
-
-  songSearch(history);
-})
-
 //Pulling the lyrics from the spotify data and appends them to the content variable in songSearch
 function getSongLyrics(songId) {
   const settings = {
@@ -232,3 +192,43 @@ function getSamples(id, content) {
     }
   });
 }
+
+//on submit, application searches and presents info based on that search
+button.on('click', function (event) {
+  event.preventDefault();
+
+  var song = $("#search").val();
+  songSearch(song);
+
+  //populates the previousSearches array with user searches
+  if(!previousSearches.includes(song)) {
+    previousSearches.push(song);
+    var search = $(`<button id="songItem">${song}</button>`);
+
+    $(".historyBtn").append(search);
+  }
+
+  //stores searches as array of strings 
+  localStorage.setItem("song", JSON.stringify(previousSearches));
+  //console.log(previousSearches);
+
+})
+
+//When a user clicks a previous search item, they are presented with the data
+//related to that item
+$(".historyBtn").on("click", "#songItem", function() {
+  var previousSong = $(this).text();
+  songSearch(previousSong);
+})
+
+//retrieves the last search from the user and displays on refresh/reload
+$(document).ready(function() {
+  var storageHistory = JSON.parse(localStorage.getItem("song"));
+
+  if(storageHistory != null){
+    var lastSong = storageHistory.length-1;
+    var history = storageHistory[lastSong];
+  }
+
+  songSearch(history);
+})
